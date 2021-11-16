@@ -7,17 +7,18 @@ public class LinearSearch {
     }
 
     public static void main(String[] args) {
-        Integer[] data = {24, 18, 12, 9, 16, 66, 32, 4};
-        int res = search(data, 16);
-        System.out.println("res = " + res);
+        int[] dataSize = {1000000, 10000000};
+        for (int n : dataSize) {
+            Integer[] data = ArrayGenerator.generateOrderedArray(n);
+            long startTime = System.nanoTime();
+            for (int i = 0; i < 100; i++) {
+                search(data, n);
+            }
+            long endTime = System.nanoTime();
+            double time = (endTime - startTime) / 1000000000.0;
+            System.out.println("n = " + n + ", 100 runs : " + time + "s");
+        }
 
-        int res2 = search(data, 666);
-        System.out.println("res2 = " + res2);
-
-
-        Student[] students = {new Student("Alice"), new Student("Bob"), new Student("Charles")};
-        int res3 = search(students, new Student("Bob"));
-        System.out.println("res3 = " + res3);
     }
 
     public static <E> int search(E[] data, E target) {
