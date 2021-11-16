@@ -13,6 +13,11 @@ public class LinearSearch {
 
         int res2 = search(data, 666);
         System.out.println("res2 = " + res2);
+
+
+        Student[] students = {new Student("Alice"), new Student("Bob"), new Student("Charles")};
+        int res3 = search(students, new Student("Bob"));
+        System.out.println("res3 = " + res3);
     }
 
     public static <E> int search(E[] data, E target) {
