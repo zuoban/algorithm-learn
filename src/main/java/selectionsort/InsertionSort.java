@@ -25,13 +25,30 @@ public class InsertionSort<E extends Comparable<E>> implements Sortable<E> {
         }
     }
 
-    @Override
-    public void sort(E[] arr) {
+    /**
+     *  改写前
+     */
+    public void sort2(E[] arr) {
         for (int i = 0; i < arr.length; i++) {
             E t = arr[i];
             int j;
             for (j = i; j - 1 >= 0 && t.compareTo(arr[j - 1]) < 0; j--) {
                 arr[j] = arr[j - 1];
+            }
+            arr[j] = t;
+        }
+    }
+
+    /**
+     * 改写后
+     */
+    @Override
+    public void sort(E[] arr) {
+        for (int i = arr.length - 1; i >= 0; i--) {
+            E t = arr[i];
+            int j;
+            for (j = i; j + 1 < arr.length && t.compareTo(arr[j + 1]) > 0; j++) {
+                arr[j] = arr[j + 1];
             }
             arr[j] = t;
         }
