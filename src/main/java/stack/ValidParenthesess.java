@@ -1,21 +1,23 @@
 package stack;
 
-import java.util.Stack;
-
 public class ValidParenthesess {
+
     public static void main(String[] args) {
-        System.out.println(new ValidParenthesess().isValid("{()}"));
+        ValidParenthesess solution = new ValidParenthesess();
+        System.out.println(solution.isValid("()[]{}"));
+        System.out.println(solution.isValid("([)]"));
+
     }
 
     public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
+        ArrayStack<Character> stack = new ArrayStack<>();
         char[] chars = s.toCharArray();
 
         for (char c : chars) {
             if (c == '(' || c == '[' || c == '{') {
                 stack.push(c);
-            } else{
-                if(stack.isEmpty()){
+            } else {
+                if (stack.isEmpty()) {
                     return false;
                 }
                 Character character = stack.pop();
@@ -30,4 +32,5 @@ public class ValidParenthesess {
         }
         return stack.isEmpty();
     }
+
 }
