@@ -1,12 +1,29 @@
 package selectionsort;
 
-import java.util.Arrays;
+import linearsearch.ArrayGenerator;
+import support.Sortable;
+import util.SortingHelper;
 
-public class SelectionSort {
+public class SelectionSort<E extends Comparable<E>> implements Sortable<E> {
     private SelectionSort() {
     }
 
-    public static <E extends Comparable<E>> void sort(E[] arr) {
+    private static <E> void swap(E[] arr, int i, int j) {
+        E tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+    public static void main(String[] args) {
+        int[] dataSize = {10000, 100000};
+        for (int n : dataSize) {
+            Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
+            SortingHelper.sortTest(new SelectionSort<>(), arr);
+        }
+    }
+
+    @Override
+    public void sort(E[] arr) {
         for (int i = 0; i < arr.length; i++) {
             // 选择 arr[i...n) 中的最小值的索引
             int minIndex = i;
@@ -18,28 +35,5 @@ public class SelectionSort {
             swap(arr, i, minIndex);
         }
     }
-
-    private static <E> void swap(E[] arr, int i, int j) {
-        E tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
-
-    public static void main(String[] args) {
-        Integer[] arr = {1, 4, 2, 3, 6, 5};
-        sort(arr);
-        System.out.println(Arrays.toString(arr));
-
-        Student[] students = {
-                new Student("Alice", 98),
-                new Student("Bob", 100),
-                new Student("Charles", 66),
-        };
-
-        sort(students);
-
-        Arrays.stream(students).forEach(System.out::println);
-    }
-
 }
 
