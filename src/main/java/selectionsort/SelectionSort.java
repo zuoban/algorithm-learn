@@ -29,6 +29,16 @@ public class SelectionSort {
         Integer[] arr = {1, 4, 2, 3, 6, 5};
         sort(arr);
         System.out.println(Arrays.toString(arr));
+
+        Student[] students = {
+                new Student("Alice", 98),
+                new Student("Bob", 100),
+                new Student("Charles", 66),
+        };
+
+        sort(students);
+
+        Arrays.stream(students).forEach(System.out::println);
     }
 
 }
