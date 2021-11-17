@@ -23,11 +23,19 @@ public class Array<E> {
     /**
      * 获取 index 索引位置的元素
      */
-    E get(int index) {
+    public E get(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Get failed, Index is illegal");
         }
         return data[index];
+    }
+
+    public E getLast() {
+        return get(size-1);
+    }
+
+    public E getFirst() {
+        return get(0);
     }
 
     /**
