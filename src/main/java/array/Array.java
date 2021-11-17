@@ -53,9 +53,12 @@ public class Array<E> {
         for (int i = index; i < size; i++) {
             data[i] = data[i + 1];
         }
-        size--;
         // help gc
         data[size] = null;
+        if (size == data.length / 2) {
+            resize(data.length / 2);
+        }
+        size--;
         return ret;
     }
 
@@ -148,12 +151,13 @@ public class Array<E> {
      * 在第 index 个位置插入一个新元素
      */
     public void add(int index, E e) {
-        if (size == data.length) {
-            throw new IllegalArgumentException("Add failed, Array is full");
-        }
 
         if (index < 0 || index > size) {
             throw new IllegalArgumentException("Add failed, Require index >=0 and index <= size");
+        }
+
+        if (size == data.length) {
+            resize(2 * data.length);
         }
 
         for (int i = size - 1; i >= index; i--) {
@@ -161,6 +165,18 @@ public class Array<E> {
         }
         data[index] = e;
         size++;
+    }
+
+    /**
+     * 扩容数组
+     */
+    private void resize(int newCapacity) {
+        E[] newData = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newData[i] = data[i];
+        }
+        data = newData;
+
     }
 
     @Override

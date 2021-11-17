@@ -9,19 +9,24 @@ public class Main {
 
         System.out.println(array);
 
-        array.add(1, 100);
+//        array.add(1, 100);
+//        System.out.println(array);
+        array.removeLast();
         System.out.println(array);
 
-        array.addFirst(-1);
-        System.out.println(array);
-
-        array.remove(2);
-        System.out.println(array);
-
-        array.removeElement(4);
-        System.out.println(array);
-
-        array.removeFirst();
-        System.out.println(array);
+//        array.add(1, 100);
+//        System.out.println(array);
+//
+//        array.addFirst(-1);
+//        System.out.println(array);
+//
+//        array.remove(2);
+//        System.out.println(array);
+//
+//        array.removeElement(4);
+//        System.out.println(array);
+//
+//        array.removeFirst();
+//        System.out.println(array);
     }
 }
