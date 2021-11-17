@@ -5,10 +5,10 @@ import support.Sortable;
 import util.SortingHelper;
 
 public class SelectionSort<E extends Comparable<E>> implements Sortable<E> {
-    private SelectionSort() {
+    public SelectionSort() {
     }
 
-    private static <E> void swap(E[] arr, int i, int j) {
+    private void swap(E[] arr, int i, int j) {
         E tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
