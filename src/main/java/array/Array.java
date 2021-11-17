@@ -1,14 +1,15 @@
 package array;
 
-public class Array {
-    private int[] data;
+public class Array<E> {
+    private E[] data;
     private int size;
 
     /**
      * 构造函数，传入数组的容量 capacity 构造 Array
      */
+    @SuppressWarnings("unchecked")
     public Array(int capacity) {
-        data = new int[capacity];
+        data = (E[]) new Object[capacity];
         size = 0;
     }
 
@@ -22,7 +23,7 @@ public class Array {
     /**
      * 获取 index 索引位置的元素
      */
-    int get(int index) {
+    E get(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Get failed, Index is illegal");
         }
@@ -34,7 +35,7 @@ public class Array {
      */
     public boolean contains(int e) {
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return true;
             }
         }
@@ -44,22 +45,24 @@ public class Array {
     /**
      * 删除 index 位置
      */
-    public int remove(int index) {
+    public E remove(int index) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Remove failed, Index is illegal");
         }
-        int ret = data[index];
+        E ret = data[index];
         for (int i = index; i < size; i++) {
             data[i] = data[i + 1];
         }
         size--;
+        // help gc
+        data[size] = null;
         return ret;
     }
 
     /**
      * 删除第一个元素
      */
-    public int removeFirst() {
+    public E removeFirst() {
         return remove(0);
     }
 
@@ -79,7 +82,7 @@ public class Array {
     /**
      * 删除最后一个元素
      */
-    public int removeLast() {
+    public E removeLast() {
         return remove(size - 1);
     }
 
@@ -89,7 +92,7 @@ public class Array {
     public int find(int e) {
 
         for (int i = 0; i < size; i++) {
-            if (data[i] == e) {
+            if (data[i].equals(e)) {
                 return i;
             }
         }
@@ -99,7 +102,7 @@ public class Array {
     /**
      * 设置 index 索引位置的元素
      */
-    void set(int index, int e) {
+    void set(int index, E e) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed, Index is illegal");
         }
@@ -130,21 +133,21 @@ public class Array {
     /**
      * 在所有元素后添加新元素
      */
-    public void addLast(int e) {
+    public void addLast(E e) {
         add(size, e);
     }
 
     /**
      * 在所有元素前不加新元素
      */
-    public void addFirst(int e) {
+    public void addFirst(E e) {
         add(0, e);
     }
 
     /**
      * 在第 index 个位置插入一个新元素
      */
-    public void add(int index, int e) {
+    public void add(int index, E e) {
         if (size == data.length) {
             throw new IllegalArgumentException("Add failed, Array is full");
         }
