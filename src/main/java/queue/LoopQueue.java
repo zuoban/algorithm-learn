@@ -7,7 +7,8 @@ public class LoopQueue<E> implements Queue<E> {
     private int size;
 
     public LoopQueue(int capacity) {
-        data = (E[]) new Object[capacity + 1];
+        // 由于不浪费空间，所以 data 静态数组的大小是 capacity 而不是 capacity + 1
+        data = (E[]) new Object[capacity];
     }
 
     public LoopQueue() {
@@ -29,7 +30,7 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     public int getCapacity() {
-        return data.length - 1;
+        return data.length;
     }
 
     @Override
@@ -39,12 +40,13 @@ public class LoopQueue<E> implements Queue<E> {
 
     @Override
     public boolean isEmpty() {
-        return front == tail;
+        return this.size == 0;
     }
 
     @Override
     public void enqueue(E e) {
-        if ((tail + 1) % data.length == front) {
+        // 不再使用 front 和 tail 之间的关系来判断队列是否为满，而直接用 size
+        if (size == getCapacity()) {
             resize(getCapacity() * 2);
         }
         data[tail] = e;
@@ -53,7 +55,7 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     private void resize(int newCapacity) {
-        E[] newData = (E[]) new Object[newCapacity + 1];
+        E[] newData = (E[]) new Object[newCapacity];
         for (int i = 0; i < size; i++) {
             newData[i] = data[(i + front) % data.length];
         }
@@ -93,9 +95,10 @@ public class LoopQueue<E> implements Queue<E> {
         StringBuilder res = new StringBuilder();
         res.append(String.format("Queue: size=%d, capacity=%d\n", size, getCapacity()));
         res.append("front [");
-        for (int i = front; i != tail; i = (i + 1) % data.length) {
-            res.append(data[i]);
-            if ((i + 1) % data.length != tail) {
+        // 循环遍历打印队列的逻辑也有相应更改
+        for (int i =0; i < size; i++) {
+            res.append(data[(front + i) % data.length]);
+            if ((i + front + 1) % data.length != tail) {
                 res.append(", ");
             }
         }
