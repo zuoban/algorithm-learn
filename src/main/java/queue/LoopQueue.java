@@ -4,11 +4,9 @@ public class LoopQueue<E> implements Queue<E> {
 
     private E[] data;
     private int front, tail;
-    private int size;
 
     public LoopQueue(int capacity) {
-        // 由于不浪费空间，所以 data 静态数组的大小是 capacity 而不是 capacity + 1
-        data = (E[]) new Object[capacity];
+        data = (E[]) new Object[capacity + 1];
     }
 
     public LoopQueue() {
@@ -30,32 +28,31 @@ public class LoopQueue<E> implements Queue<E> {
     }
 
     public int getCapacity() {
-        return data.length;
+        return data.length - 1;
     }
 
     @Override
     public int getSize() {
-        return this.size;
+        return tail >= front ? tail - front : tail - front + data.length;
     }
 
     @Override
     public boolean isEmpty() {
-        return this.size == 0;
+        return front == tail;
     }
 
     @Override
     public void enqueue(E e) {
-        // 不再使用 front 和 tail 之间的关系来判断队列是否为满，而直接用 size
-        if (size == getCapacity()) {
+        if ((tail + 1) % data.length == front) {
             resize(getCapacity() * 2);
         }
         data[tail] = e;
         tail = (tail + 1) % data.length;
-        size++;
     }
 
     private void resize(int newCapacity) {
-        E[] newData = (E[]) new Object[newCapacity];
+        E[] newData = (E[]) new Object[newCapacity + 1];
+        int size = getSize();
         for (int i = 0; i < size; i++) {
             newData[i] = data[(i + front) % data.length];
         }
@@ -72,9 +69,8 @@ public class LoopQueue<E> implements Queue<E> {
         E ret = data[front];
         data[front] = null;
         front = (front + 1) % data.length;
-        size--;
 
-        if (size == getCapacity() / 4 && getCapacity() / 2 != 0) {
+        if (getSize() == getCapacity() / 4 && getCapacity() / 2 != 0) {
             resize(getCapacity() / 2);
         }
 
@@ -93,12 +89,11 @@ public class LoopQueue<E> implements Queue<E> {
     public String toString() {
 
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Queue: size=%d, capacity=%d\n", size, getCapacity()));
+        res.append(String.format("Queue: size=%d, capacity=%d\n", getSize(), getCapacity()));
         res.append("front [");
-        // 循环遍历打印队列的逻辑也有相应更改
-        for (int i =0; i < size; i++) {
-            res.append(data[(front + i) % data.length]);
-            if ((i + front + 1) % data.length != tail) {
+        for (int i = front; i != tail; i = (i + 1) % data.length) {
+            res.append(data[i]);
+            if ((i + 1) % data.length != tail) {
                 res.append(", ");
             }
         }
