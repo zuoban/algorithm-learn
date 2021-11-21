@@ -1,6 +1,8 @@
 package mergesort;
 
 import linearsearch.ArrayGenerator;
+import selectionsort.InsertionSort;
+import selectionsort.SelectionSort;
 import support.Sortable;
 import util.SortingHelper;
 
@@ -10,13 +12,16 @@ public class MergeSort<E extends Comparable<E>> implements Sortable<E> {
     public static void main(String[] args) {
         int n = 100000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
+        Integer[] arr2 = Arrays.copyOf(arr, arr.length);
+        Integer[] arr3 = Arrays.copyOf(arr, arr.length);
         SortingHelper.sortTest(new MergeSort<>(), arr);
+        SortingHelper.sortTest(new SelectionSort<>(), arr2);
+        SortingHelper.sortTest(new InsertionSort<>(), arr3);
     }
 
     @Override
     public void sort(E[] arr) {
         sort(arr, 0, arr.length - 1);
-
     }
 
     private void sort(E[] arr, int l, int r) {
