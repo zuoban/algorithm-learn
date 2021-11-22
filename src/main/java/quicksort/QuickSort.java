@@ -6,6 +6,7 @@ import support.Sortable;
 import util.SortingHelper;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class QuickSort<E extends Comparable<E>> implements Sortable<E> {
     @Override
@@ -25,6 +26,8 @@ public class QuickSort<E extends Comparable<E>> implements Sortable<E> {
 
     private int partition(E[] arr, int l, int r) {
         // arr[ l+1 .. j] < v ; arr[j +1 ..i) >= v
+        int p = l + ThreadLocalRandom.current().nextInt(r - l + 1);
+        swap(arr, l, p);
         int j = l;
         for (int i = l + 1; i <= r; i++) {
             if (arr[i].compareTo(arr[l]) < 0) {
@@ -43,7 +46,7 @@ public class QuickSort<E extends Comparable<E>> implements Sortable<E> {
     }
 
     public static void main(String[] args) {
-        int n = 5000;
+        int n = 5000000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         Integer[] arr2 = Arrays.copyOf(arr, arr.length);
 
