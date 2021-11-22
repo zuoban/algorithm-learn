@@ -43,12 +43,17 @@ public class QuickSort<E extends Comparable<E>> implements Sortable<E> {
     }
 
     public static void main(String[] args) {
-        int n = 1000000;
+        int n = 5000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
         Integer[] arr2 = Arrays.copyOf(arr, arr.length);
 
         SortingHelper.sortTest(new MergeSort<>(), arr);
         SortingHelper.sortTest(new QuickSort<>(), arr2);
 
+
+        arr = ArrayGenerator.generateOrderedArray(n);
+        arr2 = Arrays.copyOf(arr, arr.length);
+        SortingHelper.sortTest(new MergeSort<>(), arr);
+        SortingHelper.sortTest(new QuickSort<>(), arr2);
     }
 }
