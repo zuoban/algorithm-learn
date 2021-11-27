@@ -1,5 +1,6 @@
 package quicksort;
 
+import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -8,39 +9,29 @@ import java.util.concurrent.ThreadLocalRandom;
 public class LeetCode215 {
     public static void main(String[] args) {
         int[] arr = {2, 1, 3, 4, 5, 0};
-        int kthLargest = new LeetCode215().findKthLargest(arr, 2);
+        int kthLargest = new LeetCode215().findKthLargest(arr, 3);
         System.out.println(kthLargest);
+        Arrays.sort(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
     public int findKthLargest(int[] nums, int k) {
-        return selectK(nums, nums.length - k);
+        return selectK(nums, 0, nums.length, nums.length - k);
     }
 
-
-    private int selectK(int[] arr, int k) {
-        int l = 0, r = arr.length -1;
-        while (l <= r) {
-            int p = partition(arr, l, r);
-            if(k == p) {
-                return arr[p];
-            }else if(k < p) {
-                r = p -1;
-            }else {
-                l = p + 1;
-            }
+    /**
+     *  在 arr[l,r) 中寻找第k个元素
+     */
+    private int selectK(int[] arr, int l, int r, int k) {
+        int p = partition(arr, l, r - 1);
+        if (k == p) {
+            return p;
+        } else if (k < p) {
+            return selectK(arr, l, p, k);
+        } else {
+            return selectK(arr, p + 1, r, k);
         }
-        throw new RuntimeException("No Solution");
     }
-//    private int selectK(int[] arr, int l, int r, int k) {
-//        int p = partition(arr, l, r);
-//        if (k == p) {
-//            return p;
-//        } else if (k < p) {
-//            return selectK(arr, l, p - 1, k);
-//        } else {
-//            return selectK(arr, p + 1, r, k);
-//        }
-//    }
 
     private int partition(int[] arr, int l, int r) {
         int p = l + ThreadLocalRandom.current().nextInt(r - l + 1);

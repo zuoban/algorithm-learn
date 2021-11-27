@@ -5,6 +5,7 @@ public class BinarySearch {
     public static <E extends Comparable<E>> int search(E[] data, E target) {
         int l = 0, r = data.length - 1;
 
+        // 在 data[l, r] 的范围中查找 target
         while (l <= r) {
             int mid = l + (r - l) >> 1;
             if (data[mid].compareTo(target) == 0) {
