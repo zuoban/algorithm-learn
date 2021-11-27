@@ -13,19 +13,34 @@ public class LeetCode215 {
     }
 
     public int findKthLargest(int[] nums, int k) {
-        return selectK(nums, 0, nums.length - 1, nums.length - k);
+        return selectK(nums, nums.length - k);
     }
 
-    private int selectK(int[] arr, int l, int r, int k) {
-        int p = partition(arr, l, r);
-        if (k == p) {
-            return p;
-        } else if (k < p) {
-            return selectK(arr, l, p - 1, k);
-        } else {
-            return selectK(arr, p + 1, r, k);
+
+    private int selectK(int[] arr, int k) {
+        int l = 0, r = arr.length -1;
+        while (l <= r) {
+            int p = partition(arr, l, r);
+            if(k == p) {
+                return arr[p];
+            }else if(k < p) {
+                r = p -1;
+            }else {
+                l = p + 1;
+            }
         }
+        throw new RuntimeException("No Solution");
     }
+//    private int selectK(int[] arr, int l, int r, int k) {
+//        int p = partition(arr, l, r);
+//        if (k == p) {
+//            return p;
+//        } else if (k < p) {
+//            return selectK(arr, l, p - 1, k);
+//        } else {
+//            return selectK(arr, p + 1, r, k);
+//        }
+//    }
 
     private int partition(int[] arr, int l, int r) {
         int p = l + ThreadLocalRandom.current().nextInt(r - l + 1);
