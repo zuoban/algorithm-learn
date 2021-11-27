@@ -1,11 +1,29 @@
 package binarysearch;
 
 public class BinarySearch {
+
     public static <E extends Comparable<E>> int search(E[] data, E target) {
-        return search(data, 0, data.length - 1, target);
+        int l = 0, r = data.length - 1;
+
+        while (l <= r) {
+            int mid = l + (r - l) >> 1;
+            if (data[mid].compareTo(target) == 0) {
+                return mid;
+            } else if (data[mid].compareTo(target) < 0) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return -1;
     }
 
-    private static <E extends Comparable<E>> int search(E[] data, int l, int r, E target) {
+
+    public static <E extends Comparable<E>> int searchR(E[] data, E target) {
+        return searchR(data, 0, data.length - 1, target);
+    }
+
+    private static <E extends Comparable<E>> int searchR(E[] data, int l, int r, E target) {
         if (l > r) {
             return -1;
         }
@@ -15,9 +33,9 @@ public class BinarySearch {
         if (data[mid].compareTo(target) == 0) {
             return mid;
         } else if (data[mid].compareTo(target) < 0) {
-            return search(data, mid + 1, r, target);
+            return searchR(data, mid + 1, r, target);
         } else {
-            return search(data, l, mid - 1, target);
+            return searchR(data, l, mid - 1, target);
         }
     }
 
