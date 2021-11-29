@@ -64,6 +64,18 @@ public class BinarySearch {
         return l;
     }
 
+    /**
+     *  < target， 返回最大值索引
+     *  == target 返回最小索引
+     */
+    public static <E extends  Comparable<E>> int lowerFloor(E[] data, E target) {
+
+        int l = lower(data, target);
+        if(l + 1 < data.length && data[l + 1].compareTo(target) == 0) {
+            return l + 1;
+        }
+        return l;
+    }
 
     public static <E extends Comparable<E>> int searchR(E[] data, E target) {
         return searchR(data, 0, data.length - 1, target);
