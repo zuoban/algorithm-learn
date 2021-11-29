@@ -19,6 +19,20 @@ public class BinarySearch {
         return -1;
     }
 
+    public static <E extends Comparable<E>> int upper(E[] data, E target) {
+        int l = 0, r = data.length;
+        // 在 data[l, r] 中寻找解
+        while (l < r) {
+            int mid = l + (r - l) / 2;
+            if (data[mid].compareTo(target) <= 0) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        return l;
+    }
+
 
     public static <E extends Comparable<E>> int searchR(E[] data, E target) {
         return searchR(data, 0, data.length - 1, target);
@@ -40,5 +54,12 @@ public class BinarySearch {
         }
     }
 
+    public static void main(String[] args) {
+        Integer[] arr = {1, 1, 3, 3, 5, 5};
+        for (int i = 0; i <= 6; i++) {
+            System.out.print(BinarySearch.upper(arr, i) + " ");
+        }
+        System.out.println();
+    }
 
 }
