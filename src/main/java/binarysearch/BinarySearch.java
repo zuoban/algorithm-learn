@@ -46,6 +46,24 @@ public class BinarySearch {
         }
     }
 
+    /**
+     * < target 的最大值
+     */
+    public static  <E extends Comparable<E>> int lower(E[] data, E target) {
+        int l = -1; int r = data.length - 1;
+        // 在 data[l,r] 中寻找解
+        while(l < r) {
+            int mid = l + (r-l + 1) / 2;
+            if(data[mid].compareTo(target)  < 0) {
+                l = mid;
+            }else {
+                r = mid - 1;
+            }
+        }
+
+        return l;
+    }
+
 
     public static <E extends Comparable<E>> int searchR(E[] data, E target) {
         return searchR(data, 0, data.length - 1, target);
@@ -79,6 +97,10 @@ public class BinarySearch {
             System.out.print(BinarySearch.ceil(arr, i) + " ");
         }
         System.out.println();
+        System.out.print("lower: ");
+        for (int i = 0; i <= 6; i++) {
+            System.out.print(BinarySearch.lower(arr, i) + " ");
+        }
     }
 
 }
