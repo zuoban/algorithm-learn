@@ -52,6 +52,27 @@ public class BST<E extends Comparable<E>> {
     }
 
     /**
+     * 看二分搜索树中是否包含元素 e
+     */
+
+    public boolean contains(E e) {
+        return contains(root, e);
+    }
+
+    private boolean contains(Node node, E e) {
+        if (node == null) {
+            return false;
+        }
+        if (node.e.compareTo(e) == 0) {
+            return true;
+        } else if (e.compareTo(node.e) < 0) {
+            return contains(node.left, e);
+        } else {
+            return contains(node.right, e);
+        }
+    }
+
+    /**
      * 向二分搜索树中添加新的元素e
      *
      * @param e
