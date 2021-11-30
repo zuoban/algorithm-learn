@@ -1,5 +1,7 @@
 package bst;
 
+import java.util.Stack;
+
 public class BST<E extends Comparable<E>> {
     private Node root;
     private int size;
@@ -111,12 +113,13 @@ public class BST<E extends Comparable<E>> {
         preOrder(node.left);
         preOrder(node.right);
     }
+
     public void inOrder() {
         inOrder(root);
     }
 
     private void inOrder(Node node) {
-        if(node == null) {
+        if (node == null) {
             return;
         }
         inOrder(node.left);
@@ -124,25 +127,31 @@ public class BST<E extends Comparable<E>> {
         inOrder(node.right);
     }
 
-    private class Node {
-        public E e;
-        public Node left, right;
-
-        public Node(E e) {
-            this.e = e;
+    public void preOrderNR() {
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+            if (cur.right != null) {
+                stack.push(cur.right);
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);
+            }
         }
     }
 
     @Override
     public String toString() {
-      StringBuilder res = new StringBuilder();
-      generateBSTString(root, 0, res);
-      return res.toString();
+        StringBuilder res = new StringBuilder();
+        generateBSTString(root, 0, res);
+        return res.toString();
     }
 
     private void generateBSTString(Node node, int depth, StringBuilder res) {
         String depthString = generateDepthString(depth);
-        if(node == null) {
+        if (node == null) {
             res.append(depthString).append("null\n");
             return;
         }
@@ -157,5 +166,14 @@ public class BST<E extends Comparable<E>> {
             res.append("--");
         }
         return res.toString();
+    }
+
+    private class Node {
+        public E e;
+        public Node left, right;
+
+        public Node(E e) {
+            this.e = e;
+        }
     }
 }

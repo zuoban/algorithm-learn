@@ -8,6 +8,7 @@ public class Main {
             bst.add(num);
         }
 
+        bst.preOrderNR();
         bst.preOrder();
         System.out.println(bst);
 
