@@ -1,7 +1,6 @@
 package linkedlist;
 
 
-import stack.ArrayStack;
 import stack.Stack;
 
 import java.util.Random;
@@ -25,14 +24,23 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int opCount = 1000000;
-        ArrayStack<Integer> arrayStack = new ArrayStack<>();
-        double time1 = testStack(arrayStack, opCount);
-        System.out.println("ArrayStack, time: " + time1 + " s");
+//        int opCount = 1000000;
+//        ArrayStack<Integer> arrayStack = new ArrayStack<>();
+//        double time1 = testStack(arrayStack, opCount);
+//        System.out.println("ArrayStack, time: " + time1 + " s");
+//
+//        LinkedListStack<Integer> linkedListStack = new LinkedListStack<>();
+//        double time2 = testStack(linkedListStack, opCount);
+//        System.out.println("LinkedListStack, time: " + time2 + " s");
+        LinkedList<Integer> list = new LinkedList<>();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addFirst(3);
+        list.addFirst(2);
+        System.out.println(list);
+        list.removeElement(2);
+        System.out.println(list);
 
-        LinkedListStack<Integer> linkedListStack = new LinkedListStack<>();
-        double time2 = testStack(linkedListStack, opCount);
-        System.out.println("LinkedListStack, time: " + time2 + " s");
 
     }
 }
