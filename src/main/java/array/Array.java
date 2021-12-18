@@ -31,7 +31,7 @@ public class Array<E> {
     }
 
     public E getLast() {
-        return get(size-1);
+        return get(size - 1);
     }
 
     public E getFirst() {
@@ -58,7 +58,7 @@ public class Array<E> {
             throw new IllegalArgumentException("Remove failed, Index is illegal");
         }
         E ret = data[index];
-        for (int i = index; i < size-1; i++) {
+        for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
         size--;
@@ -200,5 +200,14 @@ public class Array<E> {
         }
         res.append(']');
         return res.toString();
+    }
+
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
+            throw new IllegalArgumentException("Index is illegal");
+        }
+        E t = data[i];
+        data[i] = data[j];
+        data[j] = t;
     }
 }
