@@ -113,7 +113,7 @@ public class Array<E> {
     /**
      * 设置 index 索引位置的元素
      */
-    void set(int index, E e) {
+    public void set(int index, E e) {
         if (index < 0 || index >= size) {
             throw new IllegalArgumentException("Set failed, Index is illegal");
         }
