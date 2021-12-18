@@ -13,6 +13,13 @@ public class MaxHeap<E extends Comparable<E>> {
         data = new Array<>();
     }
 
+    public MaxHeap(E[] arr) {
+        data = new Array<E>(arr);
+        for (int i = parent(arr.length - 1); i >= 0; i--) {
+            shiftDown(i);
+        }
+    }
+
     /**
      * 返回堆中元素个数
      */

@@ -13,6 +13,11 @@ public class Array<E> {
         size = 0;
     }
 
+    public Array(E[] arr) {
+        this.data = arr;
+        size = data.length;
+    }
+
     /**
      * 参数构造器，默认数组容量 10
      */
