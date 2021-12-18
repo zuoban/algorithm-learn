@@ -28,12 +28,14 @@ public class HeapSort<E extends Comparable<E>> implements Sortable<E> {
         Integer[] arr2 = Arrays.copyOf(arr, arr.length);
         Integer[] arr3 = Arrays.copyOf(arr, arr.length);
         Integer[] arr4 = Arrays.copyOf(arr, arr.length);
+        Integer[] arr5 = Arrays.copyOf(arr, arr.length);
 
 
         SortingHelper.sortTest(new HeapSort<>(), arr);
         SortingHelper.sortTest(new MergeSort<>(), arr2);
         SortingHelper.sortTest(new QuickSort2Ways<>(), arr3);
         SortingHelper.sortTest(new QuickSort3Ways<>(), arr4);
+        SortingHelper.sortTest(new HeapSort2<>(), arr5);
 
     }
 }
