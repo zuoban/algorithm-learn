@@ -68,10 +68,4 @@ public class QuickSort3Ways<E extends Comparable<E>> implements Sortable<E> {
         sort(arr, l, lt - 1);
         sort(arr, gt, r);
     }
-
-    private void swap(E[] arr, int i, int j) {
-        E t = arr[i];
-        arr[i] = arr[j];
-        arr[j] = t;
-    }
 }

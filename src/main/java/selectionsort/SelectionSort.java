@@ -8,11 +8,6 @@ public class SelectionSort<E extends Comparable<E>> implements Sortable<E> {
     public SelectionSort() {
     }
 
-    private void swap(E[] arr, int i, int j) {
-        E tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-    }
 
     public static void main(String[] args) {
         int[] dataSize = {10000, 100000};

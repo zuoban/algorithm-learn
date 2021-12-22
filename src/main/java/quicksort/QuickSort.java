@@ -44,9 +44,4 @@ public class QuickSort<E extends Comparable<E>> implements Sortable<E> {
         return j;
     }
 
-    private void swap(E[] arr, int i, int j) {
-        E t = arr[i];
-        arr[i] = arr[j];
-        arr[j] = t;
-    }
 }

@@ -34,10 +34,4 @@ public class HeapSort2<E extends Comparable<E>> implements Sortable<E> {
             k = j;
         }
     }
-
-    private void swap(E[] data, int k, int j) {
-        E t = data[k];
-        data[k] = data[j];
-        data[j] = t;
-    }
 }

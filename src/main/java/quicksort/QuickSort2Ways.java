@@ -52,12 +52,6 @@ public class QuickSort2Ways<E extends Comparable<E>> implements Sortable<E> {
 
     }
 
-    private void swap(E[] arr, int i, int j) {
-        E t = arr[i];
-        arr[i] = arr[j];
-        arr[j] = t;
-    }
-
     public static void main(String[] args) {
         int n = 100000;
         Integer[] arr = ArrayGenerator.generateRandomArray(n, 1);
